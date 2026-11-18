@@ -1,0 +1,2 @@
+document.querySelectorAll('[data-confirm]').forEach(el=>el.addEventListener('click',e=>{if(!confirm(el.dataset.confirm))e.preventDefault()}));
+document.querySelectorAll('[data-search]').forEach(input=>input.addEventListener('input',()=>{const q=input.value.toLowerCase();document.querySelectorAll(input.dataset.search).forEach(row=>row.style.display=row.innerText.toLowerCase().includes(q)?'':'none')}));

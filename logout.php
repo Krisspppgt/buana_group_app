@@ -1,0 +1,1 @@
+<?php require_once 'includes/functions.php'; if(current_user()) log_activity('Logout','Keluar dari aplikasi'); session_destroy(); header('Location: login.php'); exit;

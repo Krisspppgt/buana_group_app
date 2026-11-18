@@ -1,0 +1,7 @@
+<?php
+require_once 'includes/functions.php'; require_login(); page_title('Permintaan Quotation');
+$rows=db()->query("SELECT o.*,u.name customer,b.name unit_name FROM orders o JOIN users u ON u.id=o.customer_id JOIN business_units b ON b.id=o.unit_id WHERE o.notes<>'' ORDER BY o.created_at DESC")->fetchAll();
+include 'includes/header.php'; ?>
+<div class="page-head"><div><h1>Permintaan Quotation</h1><p class="sub">Daftar permintaan penawaran yang disampaikan melalui catatan pesanan.</p></div><a class="btn gold" href="order_create.php">＋ Permintaan Penawaran</a></div>
+<div class="card"><div class="table-wrap"><table><thead><tr><th>No. Referensi</th><th>Pelanggan</th><th>Unit</th><th>Catatan / Kebutuhan</th><th>Nilai awal</th><th></th></tr></thead><tbody><?php foreach($rows as $r): ?><tr><td><?=e($r['order_no'])?></td><td><?=e($r['customer'])?></td><td><?=e($r['unit_name'])?></td><td style="white-space:normal;min-width:200px"><?=e($r['notes'])?></td><td><?=rupiah($r['total'])?></td><td><a class="btn small secondary" href="order_view.php?id=<?=$r['id']?>">Tinjau</a></td></tr><?php endforeach; ?><?php if(!$rows): ?><tr><td colspan="6" class="empty">Belum ada permintaan quotation.</td></tr><?php endif; ?></tbody></table></div></div>
+<?php include 'includes/footer.php'; ?>
